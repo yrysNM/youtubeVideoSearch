@@ -4,6 +4,7 @@ import youtube from "../apis/youtube";
 import VideoList from "./VideoList";
 import VideoDetail from "./VideoDetail";
 import youtubeStatistics from "../apis/youtubeStatistics";
+import BgVideo from "./bgVideo/bgVideo";
 
 class App extends Component {
   constructor(props) {
@@ -19,8 +20,7 @@ class App extends Component {
   handleSubmit = async (termFromSearchBar) => {
     const response = await youtube.get("/search", {
       params: {
-        q: termFromSearchBar, 
-        "order": "date",
+        q: termFromSearchBar,
       }
     });
 
@@ -28,8 +28,8 @@ class App extends Component {
       videos: response.data.items
     })
 
-    console.log("this is resp", response);
-  
+    // console.log("this is resp", response);
+
 
   }
 
@@ -37,16 +37,16 @@ class App extends Component {
    * 
    * @param {modiled} videoViews 
    */
-  videoViews = async (videoId) => {
-    const response = await youtubeStatistics.get("/videos",{
-      params: {
-        id: videoId,
-         
-      }
-    }); 
+  // videoViews = async (videoId) => {
+  //   const response = await youtubeStatistics.get("/videos", {
+  //     params: {
+  //       id: videoId,
 
-    console.log(response);
-  }
+  //     }
+  //   });
+
+  //   console.log(response);
+  // }
 
 
 
@@ -56,11 +56,23 @@ class App extends Component {
 
   render() {
     return (
-      <div className='ui container' style={{ marginTop: '1em' }}>
-        <SearchBar handleFormSubmit={this.handleSubmit} videoViews={this.videoViews}/>
+      <>
+        <div className="bgColor">
+          <BgVideo />
+        </div>
+
+        <div className="inputSearch">
+          <SearchBar handleFormSubmit={this.handleSubmit} videoViews={this.videoViews} />
+
+        </div>
+        
         <div className='ui grid'>
           <div className="ui row">
-            <div className="eleven wide column">
+            <div className="detailImg">
+              {/**
+               * @param {Todo: new page for showing video with stylzing }
+               * 
+               */}
               <VideoDetail video={this.state.selectedVideo} />
             </div>
             <div className="five wide column">
@@ -68,7 +80,7 @@ class App extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

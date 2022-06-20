@@ -1,0 +1,20 @@
+
+@import "./base/variable";
+
+* {
+    margin: 0; 
+    padding:0; 
+    box-sizing: border-box;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-weight: 400;
+}
+
+
+.container {
+    width: 1040px;
+    margin: 0 auto; 
+
+}
+
+@import "./blocks/searchInput";
+@import "./blocks/modifiedYTIframe";
