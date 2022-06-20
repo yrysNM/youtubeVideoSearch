@@ -30,7 +30,7 @@ class VideoDetail extends Component {
             );
         }
         
-        const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}`;
+        const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}?&autoplay=0`;
         return (
             <div className="detailImg__block">
                 <div className="detailImg__iframe">

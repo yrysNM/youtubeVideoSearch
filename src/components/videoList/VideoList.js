@@ -1,4 +1,4 @@
-import VideoItem from "./VideoItem";
+import VideoItem from "../videoItem/VideoItem";
 
 const VideoList = ({videos, handleVideoSelect, videoViews}) => {
     let arrVideoViews = [];
@@ -8,7 +8,7 @@ const VideoList = ({videos, handleVideoSelect, videoViews}) => {
         return <VideoItem key ={video.id.videoId}  video={video} handleVideoSelect={handleVideoSelect} />
     });
     // videoViews(arrVideoViews.toString());
-    return <div className="ui relexed divided list">{renderredVideos}</div>
+    return <div className="videoList__block">{renderredVideos}</div>
 };
 
 export default VideoList;

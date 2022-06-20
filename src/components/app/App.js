@@ -1,10 +1,10 @@
 import { Component } from "react";
-import SearchBar from "./Searchbar";
-import youtube from "../apis/youtube";
-import VideoList from "./VideoList";
-import VideoDetail from "./VideoDetail";
-import youtubeStatistics from "../apis/youtubeStatistics";
-import BgVideo from "./bgVideo/bgVideo";
+import youtube from "../../apis/youtube";
+// import youtubeStatistics from "../apis/youtubeStatistics";
+import SearchBar from "../appSearchbar/Searchbar";
+import VideoList from "../videoList/VideoList";
+import VideoDetail from "../videoDetail/VideoDetail";
+import BgVideo from "../bgVideo/bgVideo";
 
 class App extends Component {
   constructor(props) {
@@ -75,7 +75,7 @@ class App extends Component {
                */}
               <VideoDetail video={this.state.selectedVideo} />
             </div>
-            <div className="five wide column">
+            <div className="videoList">
               <VideoList videoViews={this.videoViews} handleVideoSelect={this.handleVideoSelect} videos={this.state.videos} />
             </div>
           </div>

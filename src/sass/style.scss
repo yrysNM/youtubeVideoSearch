@@ -9,6 +9,10 @@
     font-weight: 400;
 }
 
+body {
+    position: relative;    
+}
+
 
 .container {
     width: 1040px;
@@ -18,3 +22,4 @@
 
 @import "./blocks/searchInput";
 @import "./blocks/modifiedYTIframe";
+@import "./blocks/videoList";

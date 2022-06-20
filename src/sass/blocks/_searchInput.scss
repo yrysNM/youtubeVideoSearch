@@ -1,13 +1,13 @@
 .inputSearch {
-    padding: 30px 0 20px 0;
-
-
+    padding: 0 0 20px 0;
+    display: inline;
 
     &__cnt {
         width: 300px;
         min-height: 250px;
         background-color: #fff;
         box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+        border-radius: 10px;
         display: flex;
         flex-direction: column;
         justify-content: center;
