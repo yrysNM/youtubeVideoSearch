@@ -9,9 +9,6 @@
     font-weight: 400;
 }
 
-body {
-    position: relative;    
-}
 
 
 .container {
@@ -23,3 +20,4 @@ body {
 @import "./blocks/searchInput";
 @import "./blocks/modifiedYTIframe";
 @import "./blocks/videoList";
+@import "./blocks/app";

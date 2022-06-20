@@ -13,7 +13,9 @@ class App extends Component {
     this.state = {
       videos: [],
       videoViews: [],
-      selectedVideo: null
+      selectedVideo: null,
+      play: false,
+      pause: false,
     };
   }
 
@@ -29,12 +31,22 @@ class App extends Component {
     })
 
     // console.log("this is resp", response);
+  }
 
 
+  /**
+   * @method PlayPause_Video
+   */
+
+  videoPlay = (playValue) => {
+    this.setState({ play: playValue });
+  }
+
+  videoPause = (pauseValue) => {
+    this.setState({ pause: pauseValue });
   }
 
   /**
-   * 
    * @param {modiled} videoViews 
    */
   // videoViews = async (videoId) => {
@@ -55,32 +67,33 @@ class App extends Component {
   }
 
   render() {
+    const {videos, pause, play, selectedVideo} = this.state;
     return (
-      <>
+      <div className="app_main">
         <div className="bgColor">
           <BgVideo />
         </div>
 
         <div className="inputSearch">
-          <SearchBar handleFormSubmit={this.handleSubmit} videoViews={this.videoViews} />
+          <SearchBar handleFormSubmit={this.handleSubmit} videoPlay={this.videoPlay} videoPause={this.videoPause} />
 
         </div>
-        
-        <div className='ui grid'>
-          <div className="ui row">
+
+        <div className='app'>
+          <div className="app_pos">
             <div className="detailImg">
               {/**
                * @param {Todo: new page for showing video with stylzing }
                * 
                */}
-              <VideoDetail video={this.state.selectedVideo} />
+              <VideoDetail video={selectedVideo} videoPlay={play} videoPause={pause} />
             </div>
             <div className="videoList">
-              <VideoList videoViews={this.videoViews} handleVideoSelect={this.handleVideoSelect} videos={this.state.videos} />
+              <VideoList videoViews={this.videoViews} handleVideoSelect={this.handleVideoSelect} videos={videos} />
             </div>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }
