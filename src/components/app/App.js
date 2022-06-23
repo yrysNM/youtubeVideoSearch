@@ -14,8 +14,8 @@ class App extends Component {
       videos: [],
       videoViews: [],
       selectedVideo: null,
-      play: false,
-      pause: false,
+      isSelectedVideo: false,
+      isPlay: true,
     };
   }
 
@@ -38,13 +38,10 @@ class App extends Component {
    * @method PlayPause_Video
    */
 
-  videoPlay = (playValue) => {
-    this.setState({ play: playValue });
+  togglePlay = (playValue) => {
+    this.setState({ isPlay: playValue });
   }
 
-  videoPause = (pauseValue) => {
-    this.setState({ pause: pauseValue });
-  }
 
   /**
    * @param {modiled} videoViews 
@@ -63,11 +60,11 @@ class App extends Component {
 
 
   handleVideoSelect = (video) => {
-    this.setState({ selectedVideo: video })
+    this.setState({ selectedVideo: video, isSelectedVideo: true})
   }
 
   render() {
-    const {videos, pause, play, selectedVideo} = this.state;
+    const {videos, isPlay, selectedVideo, isSelectedVideo} = this.state;
     return (
       <div className="app_main">
         <div className="bgColor">
@@ -75,7 +72,7 @@ class App extends Component {
         </div>
 
         <div className="inputSearch">
-          <SearchBar handleFormSubmit={this.handleSubmit} videoPlay={this.videoPlay} videoPause={this.videoPause} />
+          <SearchBar handleFormSubmit={this.handleSubmit} togglePlay={this.togglePlay} isSelectedVideo={isSelectedVideo} />
 
         </div>
 
@@ -86,7 +83,7 @@ class App extends Component {
                * @param {Todo: new page for showing video with stylzing }
                * 
                */}
-              <VideoDetail video={selectedVideo} videoPlay={play} videoPause={pause} />
+              <VideoDetail video={selectedVideo} togglePlay={isPlay} />
             </div>
             <div className="videoList">
               <VideoList videoViews={this.videoViews} handleVideoSelect={this.handleVideoSelect} videos={videos} />

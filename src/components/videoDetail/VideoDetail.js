@@ -14,7 +14,7 @@ class VideoDetail extends Component {
     // }
 
     render() {
-        const {video} = this.props;
+        const {video, togglePlay} = this.props;
         if (!video) {
             return (
                 <div>
@@ -31,11 +31,12 @@ class VideoDetail extends Component {
 
 
                     <ReactPlayer
-                        playing
+                        playing={togglePlay}
                         className='react-player'
                         url={videoSrc}
                         width='100%'
                         height='100%'
+                        vimeoConfig={{ iframeParams: { fullscreen: 0 } }}
                         />
                 </div>
 

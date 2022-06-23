@@ -6,9 +6,8 @@ class Searchbar extends Component {
         super(props);
 
         this.state = {
-            term: "", 
-            play: false,
-            pause: false
+            term: "",
+            isPlay: false,
         };
 
     }
@@ -30,24 +29,29 @@ class Searchbar extends Component {
     }
 
     videoPlay = () => {
-        this.setState(({play}) => {
+        this.setState(({ isPlay }) => {
             return {
-                play: !play
+                isPlay: !isPlay
             }
         })
+
+        this.props.togglePlay(this.state.isPlay);
     }
 
-    videoPause = () => {
-        this.setState(({pause}) => {
-            return {
-                pause: !pause
-            }
-        })
-    }
 
     render() {
 
+        const { isSelectedVideo } = this.props;
+        const {isPlay} = this.state;
+        
+        const Show_Btns = () =>  {
 
+            return (
+                <div className="playPauseVideo">
+                    <button className="playPauseVideo__btnPlay" onClick={this.videoPlay}>{(isPlay) ? "Play" : "Pause"}</button>
+                </div>
+            );
+        }
 
         return (
             <div className="container">
@@ -68,17 +72,14 @@ class Searchbar extends Component {
                             </div>
                         </form>
                     </div>
-
-                    <div className="playPauseVideo">
-                        <button className="playPauseVideo__btnPlay" onClick={this.videoPlay}>Play</button>
-                        <button className="playPauseVideo__btnPause" onClick={this.videoPause}>pause</button>
-                    </div>
+                    {(isSelectedVideo) ? Show_Btns() : null}
 
                 </div>
             </div>
         );
     }
-
-
 }
+
+
+
 export default Searchbar;
