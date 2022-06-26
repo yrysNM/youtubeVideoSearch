@@ -7,7 +7,8 @@ const VideoList = ({videos, handleVideoSelect, videoViews}) => {
         // videoViews(video.id.videoId);
         return <VideoItem key ={video.id.videoId}  video={video} handleVideoSelect={handleVideoSelect} />
     });
-    // videoViews(arrVideoViews.toString());
+
+        videoViews(arrVideoViews.toString());
     return <div className="videoList__block">{renderredVideos}</div>
 };
 

@@ -1,6 +1,6 @@
 import { Component } from "react";
 import youtube from "../../apis/youtube";
-// import youtubeStatistics from "../apis/youtubeStatistics";
+import youtubeStatistics from "../../apis/youtubeStatistics";
 import SearchBar from "../appSearchbar/Searchbar";
 import VideoList from "../videoList/VideoList";
 import VideoDetail from "../videoDetail/VideoDetail";
@@ -19,17 +19,15 @@ class App extends Component {
     };
   }
 
-  handleSubmit = async (termFromSearchBar) => {
+ handleSubmit = async (termFromSearchBar) => {
     const response = await youtube.get("/search", {
       params: {
         q: termFromSearchBar,
       }
     });
-
     this.setState({
       videos: response.data.items
     })
-
     // console.log("this is resp", response);
   }
 
@@ -46,25 +44,26 @@ class App extends Component {
   /**
    * @param {modiled} videoViews 
    */
-  // videoViews = async (videoId) => {
-  //   const response = await youtubeStatistics.get("/videos", {
-  //     params: {
-  //       id: videoId,
+  videoViews =  (videoId) => {
+    console.log(videoId);
+    // const response = await youtubeStatistics.get("/videos", {
+    //   params: {
+    //     id: videoId,
 
-  //     }
-  //   });
+    //   }
+    // });
 
-  //   console.log(response);
-  // }
+    // console.log(response);
+  }
 
 
 
   handleVideoSelect = (video) => {
-    this.setState({ selectedVideo: video, isSelectedVideo: true})
+    this.setState({ selectedVideo: video, isSelectedVideo: true })
   }
 
   render() {
-    const {videos, isPlay, selectedVideo, isSelectedVideo} = this.state;
+    const { videos, isPlay, selectedVideo, isSelectedVideo } = this.state;
     return (
       <div className="app_main">
         <div className="bgColor">
