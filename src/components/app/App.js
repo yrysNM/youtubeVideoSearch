@@ -1,6 +1,5 @@
 import { Component } from "react";
 import youtube from "../../apis/youtube";
-import youtubeStatistics from "../../apis/youtubeStatistics";
 import SearchBar from "../appSearchbar/Searchbar";
 import VideoList from "../videoList/VideoList";
 import VideoDetail from "../videoDetail/VideoDetail";
@@ -12,14 +11,13 @@ class App extends Component {
 
     this.state = {
       videos: [],
-      videoViews: [],
       selectedVideo: null,
       isSelectedVideo: false,
       isPlay: true,
     };
   }
 
- handleSubmit = async (termFromSearchBar) => {
+  handleSubmit = async (termFromSearchBar) => {
     const response = await youtube.get("/search", {
       params: {
         q: termFromSearchBar,
@@ -41,20 +39,7 @@ class App extends Component {
   }
 
 
-  /**
-   * @param {modiled} videoViews 
-   */
-  videoViews =  (videoId) => {
-    console.log(videoId);
-    // const response = await youtubeStatistics.get("/videos", {
-    //   params: {
-    //     id: videoId,
 
-    //   }
-    // });
-
-    // console.log(response);
-  }
 
 
 
@@ -78,14 +63,14 @@ class App extends Component {
         <div className='app'>
           <div className="app_pos">
             <div className="detailImg">
-              {/**
+               {/**
                * @param {Todo: new page for showing video with stylzing }
                * 
                */}
               <VideoDetail video={selectedVideo} togglePlay={isPlay} />
             </div>
             <div className="videoList">
-              <VideoList videoViews={this.videoViews} handleVideoSelect={this.handleVideoSelect} videos={videos} />
+              <VideoList handleVideoSelect={this.handleVideoSelect} videos={videos} />
             </div>
           </div>
         </div>
