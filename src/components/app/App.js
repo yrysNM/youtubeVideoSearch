@@ -39,16 +39,13 @@ class App extends Component {
   }
 
 
-
-
-
-
   handleVideoSelect = (video) => {
     this.setState({ selectedVideo: video, isSelectedVideo: true })
   }
 
   render() {
     const { videos, isPlay, selectedVideo, isSelectedVideo } = this.state;
+
     return (
       <div className="app_main">
         <div className="bgColor">

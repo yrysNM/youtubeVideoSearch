@@ -1,6 +1,10 @@
+
 import "../../styles/video.css";
 
 const VideoItem = ({ video, handleVideoSelect }) => {
+    
+
+
     return (
         <div onClick={() => handleVideoSelect(video)} className='videoList__item'>
             <div className='videoList__item_title'>

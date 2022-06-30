@@ -1,39 +1,42 @@
+import VideoItem from "../videoItem/VideoItem";
 import { useEffect, useState } from "react";
 import youtubeStatistics from "../../apis/youtubeStatistics";
-import VideoItem from "../videoItem/VideoItem";
-
+import { getSpaceUntilMaxLength } from "@testing-library/user-event/dist/utils";
 const VideoList = ({ videos, handleVideoSelect }) => {
+  
     const [videoViews, setVideoViews] = useState([]);
-    
+
+
     /**
-     * @param {modiled} videoViews 
-    */
-   async function metadata(videoId) {
+    * @param {modiled} videoViews 
+     */
+    async function metadata(videoId) {
 
-       const response = await youtubeStatistics.get("/videos", {
-           params: {
-               id: videoId,
-           }
-       });
-       setVideoViews(response.data.items);
-   }
-
-   
-   // function videoStatictics(videoId) {
-       // }
-       
-       let arrVideoViews = [];
-       const renderredVideos = videos.map((video) => {
-           arrVideoViews.push(video.id.videoId);
-           // videoViews(video.id.videoId);
-           return <VideoItem key={video.id.videoId} video={video} handleVideoSelect={handleVideoSelect} />
+        const response = await youtubeStatistics.get("/videos", {
+            params: {
+                id: videoId,
+            }
         });
-        
+        console.log(response.data);
+        setVideoViews(videoViews => [...videoViews, response.data.items]);
+    }
+    
     useEffect(() => {
-        metadata(arrVideoViews.toString());
+        videos.map((video) => {
+          return metadata(video.id.videoId);
+            // setVideoViews(metadata(video.id.videoId));
+        })
+        
+    }, [videos]);
+    const renderredVideos = videos.map((video) => {
+        // metadata(video.id.videoId);
+        return <VideoItem key={video.id.videoId} video={video} handleVideoSelect={handleVideoSelect} />
     });
-    // metadata(arrVideoViews.toString());
+
+
     return <div className="videoList__block">{renderredVideos}</div>
+
+
 };
 
 export default VideoList;
