@@ -1,53 +1,43 @@
-import { Component } from "react";
+// import { Component, useState, useEffect } from "react";
 import ReactPlayer from "react-player";
 
-class VideoDetail extends Component {
-    constructor(props) {
-        super(props); 
-        this.state = {};
-    }
- 
-    // videoViews = (URL) => {
-    //     axios.get(URL).then((reponse) => {
-    //         console.log(reponse);
-    //     })
-    // }
+const VideoDetail = ({ video, togglePlay }) => {
 
-    render() {
-        const {video, togglePlay} = this.props;
-        if (!video) {
-            return (
-                <div>
- 
-                </div>
-            );
-        }
-        
-        const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}`;
-
+    if (!video) {
         return (
-            <div className="detailImg__block">
-                <div className="detailImg__iframe">
-
-
-                    <ReactPlayer
-                        playing={togglePlay}
-                        className='react-player'
-                        url={videoSrc}
-                        width='100%'
-                        height='100%'
-                        vimeoConfig={{ iframeParams: { fullscreen: 0 } }}
-                        />
-                </div>
+            <div>
 
             </div>
-
         );
     }
 
-    _onReady(event) {
-        event.target.pauseVideo();
-    }
+    const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}`;
+
+    // const _onReady = (event) => {
+    //     event.target.pauseVideo();
+    // }
+
+    return (
+        <div className="detailImg__block">
+            <div className="detailImg__iframe">
+
+
+                <ReactPlayer
+                    playing={togglePlay}
+                    className='react-player'
+                    url={videoSrc}
+                    width='100%'
+                    height='100%'
+                    vimeoconfig={{ iframeParams: { fullscreen: 0 } }}
+                />
+            </div>
+
+        </div>
+
+    )
+
+
+
 }
 
 

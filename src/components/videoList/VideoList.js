@@ -2,8 +2,9 @@ import VideoItem from "../videoItem/VideoItem";
 import { useEffect, useState } from "react";
 import youtubeStatistics from "../../apis/youtubeStatistics";
 import { getSpaceUntilMaxLength } from "@testing-library/user-event/dist/utils";
+
 const VideoList = ({ videos, handleVideoSelect }) => {
-  
+
     const [videoViews, setVideoViews] = useState([]);
 
 
@@ -20,13 +21,13 @@ const VideoList = ({ videos, handleVideoSelect }) => {
         console.log(response.data);
         setVideoViews(videoViews => [...videoViews, response.data.items]);
     }
-    
+
     useEffect(() => {
         videos.map((video) => {
-          return metadata(video.id.videoId);
+            return metadata(video.id.videoId);
             // setVideoViews(metadata(video.id.videoId));
         })
-        
+
     }, [videos]);
     const renderredVideos = videos.map((video) => {
         // metadata(video.id.videoId);
