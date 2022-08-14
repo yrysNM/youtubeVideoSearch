@@ -1,41 +1,88 @@
 import VideoItem from "../videoItem/VideoItem";
+import useBreakpoint from "use-breakpoint";
 import { useEffect, useState } from "react";
+import { UIBreakPoints } from "../responsiveUI/UIBreakPoint";
 import youtubeStatistics from "../../apis/youtubeStatistics";
-import { getSpaceUntilMaxLength } from "@testing-library/user-event/dist/utils";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper";
+import "swiper/css/bundle";
+import "swiper/css";
+import "swiper/css/pagination";
+
 
 const VideoList = ({ videos, handleVideoSelect }) => {
 
-    const [videoViews, setVideoViews] = useState([]);
+    const { breakpoint, maxWidth, minWidth } = useBreakpoint(UIBreakPoints, "");
 
-
-    /**
-    * @param {modiled} videoViews 
-     */
-    async function metadata(videoId) {
-
-        const response = await youtubeStatistics.get("/videos", {
-            params: {
-                id: videoId,
-            }
-        });
-
-        setVideoViews(videoViews => [...videoViews, response.data.items]);
-    }
+    const [breakPointSize, setBreakPointSize] = useState(false);
 
     useEffect(() => {
-        videos.map((video) => {
-            return metadata(video.id.videoId);
-            // setVideoViews(metadata(video.id.videoId));
-        })
+        setBreakPointSize(breakpoint === "tablet" || breakpoint === "phablet" || breakpoint === "mobile");
+    }, [minWidth]);
 
-    }, [videos]);
+    /**
+     * @param {modiled} videoViews for future if i back this petproject
+     */
+    // const [videoViews, setVideoViews] = useState([]);
+    // async function metadata(videoId) {
+    //     console.log("render");
+    //     const response = await youtubeStatistics.get("/videos", {
+    //         params: {
+    //             id: videoId,
+    //         }
+    //     });
+
+    //     setVideoViews(videoViews => [...videoViews, response.data.items]);
+    // }
+
+    // useEffect(() => {
+    //     videos.map((video) => {
+    //         return metadata(video.id.videoId);
+    //     })
+
+    // }, [videos]);
+
     const renderredVideos = videos.map((video) => {
-        // metadata(video.id.videoId);
-        return <VideoItem key={video.id.videoId} video={video} handleVideoSelect={handleVideoSelect} />
+
+        return <VideoItem
+            video={video}
+            key={video.id.videoId}
+            handleVideoSelect={handleVideoSelect} />;
     });
 
+    const slideRender = () => {
 
-    return <div className="videoList__block">{renderredVideos}</div>
+        return (
+            <Swiper
+                slidesPerView={2}
+                pagination={{
+                    clickable: true,
+                }}
+                modules={[Pagination]}>
+
+                {videos.map(video => {
+                    return (
+                        <SwiperSlide key={video.id.videoId}>
+                            <VideoItem
+                                video={video}
+                                handleVideoSelect={handleVideoSelect} />
+                        </SwiperSlide>
+
+                    );
+                })}
+            </Swiper>
+
+        );
+
+    };
+
+
+    return (
+
+        <div className="videoList__block">
+            {breakPointSize ? slideRender() : renderredVideos}
+        </div>
+    );
 
 
 };

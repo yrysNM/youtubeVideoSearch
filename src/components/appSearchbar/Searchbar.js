@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import dataContext from "../../context/dataContext";
 import searchIcon from "../../icons/searchIcon.svg";
 import "./searchBar.scss";
@@ -7,7 +7,19 @@ const Searchbar = ({ handleFormSubmit, isSelectedVideo }) => {
 
     const context = useContext(dataContext)
     const [term, setTerm] = useState("");
-    const [isPlay, setIsPlay] = useState(false);
+    const [isPlay, setIsPlay] = useState(context.play);
+
+
+    useEffect(() => {
+        console.log("render");
+        context.togglePlay(isPlay);
+
+    }, [isPlay]);
+
+    useEffect(() => {
+        setIsPlay(context.play);
+    }, [context.play]);
+
 
     const handleChange = (e) => {
         setTerm(e.target.value);
@@ -25,10 +37,9 @@ const Searchbar = ({ handleFormSubmit, isSelectedVideo }) => {
 
     const videoPlay = () => {
 
-
         setIsPlay(isPlay => !isPlay);
 
-        context.togglePlay(isPlay);
+
     }
 
     const Show_Btns = () => {
@@ -40,7 +51,7 @@ const Searchbar = ({ handleFormSubmit, isSelectedVideo }) => {
                         <polyline points="179,1 179,59 1,59 1,1 179,1" className="bg-line" />
                         <polyline points="179,1 179,59 1,59 1,1 179,1" className="hl-line" />
                     </svg>
-                    <span> {(isPlay) ? "Play" : "Pause"}</span>
+                    <span> {(isPlay) ? "Pause" : "Play"}</span>
                 </button>
             </div>
         );
@@ -51,7 +62,7 @@ const Searchbar = ({ handleFormSubmit, isSelectedVideo }) => {
     return (
 
 
-        <div className="inputSearch__cnt" style={{ opacity: `${context.play || isPlay ? "0.1" : "1"}` }}>
+        <div className="inputSearch__cnt" style={{ opacity: `${context.play || isPlay ? "0.3" : "1"}` }}>
 
             <div className="inputSearch__header">
 
@@ -62,7 +73,7 @@ const Searchbar = ({ handleFormSubmit, isSelectedVideo }) => {
                 <form onSubmit={handleSubmit} className='inputSearch__form'>
                     <div className='field'>
                         <label htmlFor="video-search">Video search in only KZ net </label>
-                        <input onChange={handleChange} name='video-search' type="text" placeholder="Search.." />
+                        <input onChange={handleChange} autoComplete="off" name='video-search' type="text" placeholder="Search.." />
                         <button type="submit" style={{ border: "none" }}>
 
                             <img src={searchIcon} alt="icon" width={30} height={30} className="searchIcon" />

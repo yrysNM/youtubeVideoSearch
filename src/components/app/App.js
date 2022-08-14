@@ -34,6 +34,7 @@ const App = () => {
   }
 
   function togglePlay(playValue) {
+
     setData({ ...data, play: playValue });
   };
 
@@ -50,7 +51,10 @@ const App = () => {
           <BgVideo />
         </div>
 
+
+
         <div className="inputSearch">
+
           <SearchBar handleFormSubmit={handleSubmit} isSelectedVideo={isSelectedVideo} />
 
         </div>
