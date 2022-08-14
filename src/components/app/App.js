@@ -4,25 +4,37 @@ import SearchBar from "../appSearchbar/Searchbar";
 import VideoList from "../videoList/VideoList";
 import VideoDetail from "../videoDetail/VideoDetail";
 import BgVideo from "../bgVideo/bgVideo";
+import dataContext from "../../context/dataContext";
+
+
+const { Provider, Consumer } = dataContext;
 
 const App = () => {
+
   const [videos, setVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isSelectedVideo, setIsSelectedVideo] = useState(false);
-  const [isPlay, setIsPlay] = useState(true);
+  // const [isPlay, setIsPlay] = useState(true);
+
+  const [data, setData] = useState({
+    play: true,
+    togglePlay: togglePlay,
+  })
+
 
   const handleSubmit = async (termFromSearchBar) => {
     const response = await youtube.get("/search", {
       params: {
         q: termFromSearchBar,
+
       }
     });
+
     setVideos(response.data.items);
-    // console.log("this is resp", response);
   }
 
-  const togglePlay = (playValue) => {
-    setIsPlay(isPlay => playValue);
+  function togglePlay(playValue) {
+    setData({ ...data, play: playValue });
   };
 
   const handleVideoSelect = (video) => {
@@ -32,29 +44,28 @@ const App = () => {
   }
   return (
     <div className="app_main">
-      <div className="bgColor">
-        <BgVideo />
-      </div>
+      <Provider value={data}>
 
-      <div className="inputSearch">
-        <SearchBar handleFormSubmit={handleSubmit} togglePlay={togglePlay} isSelectedVideo={isSelectedVideo} />
+        <div className="bgColor">
+          <BgVideo />
+        </div>
 
-      </div>
+        <div className="inputSearch">
+          <SearchBar handleFormSubmit={handleSubmit} isSelectedVideo={isSelectedVideo} />
 
-      <div className='app'>
-        <div className="app_pos">
-          <div className="detailImg">
-            {/**
-             * @param {Todo: new page for showing video with stylzing }
-             * 
-             */}
-            <VideoDetail video={selectedVideo} togglePlay={isPlay} />
-          </div>
-          <div className="videoList">
-            <VideoList handleVideoSelect={handleVideoSelect} videos={videos} />
+        </div>
+
+        <div className='app'>
+          <div className="app_pos">
+            <div className="detailImg">
+              <VideoDetail video={selectedVideo} play={data.play} />
+            </div>
+            <div className="videoList">
+              <VideoList handleVideoSelect={handleVideoSelect} videos={videos} />
+            </div>
           </div>
         </div>
-      </div>
+      </Provider>
     </div>
   );
 }

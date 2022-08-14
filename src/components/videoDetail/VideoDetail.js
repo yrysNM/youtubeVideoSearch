@@ -1,7 +1,8 @@
-// import { Component, useState, useEffect } from "react";
-import ReactPlayer from "react-player";
 
-const VideoDetail = ({ video, togglePlay }) => {
+import ReactPlayer from "react-player";
+import "./videoDetail.scss";
+
+const VideoDetail = ({ video, play }) => {
 
     if (!video) {
         return (
@@ -13,17 +14,13 @@ const VideoDetail = ({ video, togglePlay }) => {
 
     const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}`;
 
-    // const _onReady = (event) => {
-    //     event.target.pauseVideo();
-    // }
-
     return (
         <div className="detailImg__block">
             <div className="detailImg__iframe">
 
 
                 <ReactPlayer
-                    playing={togglePlay}
+                    playing={play}
                     className='react-player'
                     url={videoSrc}
                     width='100%'

@@ -6,7 +6,10 @@ export default axios.create({
     baseURL: 'https://www.googleapis.com/youtube/v3/',
     params: {
         part: 'snippet',
-        maxResults: 5,
+        maxResults: 6,
+        location: "48.16275430490416, 66.93669446510226",
+        locationRadius: "1000km",
+        type: "video",
         key: KEY
     }
 })

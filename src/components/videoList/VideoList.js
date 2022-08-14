@@ -18,7 +18,7 @@ const VideoList = ({ videos, handleVideoSelect }) => {
                 id: videoId,
             }
         });
-        console.log(response.data);
+
         setVideoViews(videoViews => [...videoViews, response.data.items]);
     }
 

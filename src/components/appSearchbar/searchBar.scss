@@ -1,0 +1,42 @@
+.playPauseVideo {
+    margin-top: 20px;
+
+    &__btnPlay {
+        width: 180px;
+        height: 60px;
+        cursor: pointer;
+        background: transparent;
+        border: 1px solid #91C9FF;
+        border-radius: 10px;
+        outline: none;
+        transition: 1s ease-in-out;
+        position: relative;
+
+        svg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 10px;
+            fill: none;
+            stroke: #fff;
+            stroke-dasharray: 150 480;
+            stroke-dashoffset: 150;
+            transition: 1s ease-in-out;
+        }
+
+        &:hover {
+            transition: 1s ease-in-out;
+            background: #4F95DA;
+        }
+
+        &:hover svg {
+            stroke-dashoffset: -480;
+        }
+
+        & span {
+            color: white;
+            font-size: 18px;
+            font-weight: 100;
+        }
+    }
+}
