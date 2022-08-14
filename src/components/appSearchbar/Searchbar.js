@@ -51,7 +51,7 @@ const Searchbar = ({ handleFormSubmit, isSelectedVideo }) => {
     return (
 
 
-        <div className="inputSearch__cnt" style={{ opacity: `${!isPlay ? "0.1" : "0.6"}` }}>
+        <div className="inputSearch__cnt" style={{ opacity: `${context.play || isPlay ? "0.1" : "1"}` }}>
 
             <div className="inputSearch__header">
 

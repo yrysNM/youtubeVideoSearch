@@ -17,7 +17,7 @@ const App = () => {
   // const [isPlay, setIsPlay] = useState(true);
 
   const [data, setData] = useState({
-    play: true,
+    play: false,
     togglePlay: togglePlay,
   })
 

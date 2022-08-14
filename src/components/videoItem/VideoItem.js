@@ -8,7 +8,10 @@ const VideoItem = ({ video, handleVideoSelect, }) => {
 
     return (
         <div
-            onClick={() => handleVideoSelect(video)}
+            onClick={() => {
+                handleVideoSelect(video)
+                context.togglePlay(true);
+            }}
             className='videoList__item'
             style={{ opacity: `${(context.play ? "0.1" : "1")}`, transition: "all 0.6s" }}>
             <div className='videoList__item_title'>
