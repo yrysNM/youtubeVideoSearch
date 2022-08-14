@@ -2,7 +2,7 @@ import VideoItem from "../videoItem/VideoItem";
 import useBreakpoint from "use-breakpoint";
 import { useEffect, useState } from "react";
 import { UIBreakPoints } from "../responsiveUI/UIBreakPoint";
-import youtubeStatistics from "../../apis/youtubeStatistics";
+import youtubeStatistics from "../../services/youtubeStatistics";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 import "swiper/css/bundle";
